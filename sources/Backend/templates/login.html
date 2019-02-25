@@ -6,7 +6,7 @@
             <div class="login-content">
                 <div class="login-logo">
                     <a href="#">
-                        <h1>Tech</h1>
+                        <div id="logo_fonzy" class="logo mb-auto"></div>
                     </a>
                 </div>
                 <div class="login-form">
@@ -49,10 +49,18 @@
 {% block script %}
     {{ block.super }}
     <script>
-        grecaptcha.ready(function () {
+        /*grecaptcha.ready(function () {
             grecaptcha.execute('{{ recaptcha_site_key }}', {action: 'homepage'}).then(function (token) {
                 jQuery("#user_captcha").val(token);
             });
+        });*/
+    </script>
+{% endblock %}
+
+{% block logo %}
+    <script>
+        jQuery(document).ready(function () {
+            logo("logo_fonzy", 400);
         });
     </script>
 {% endblock %}

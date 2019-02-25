@@ -101,10 +101,13 @@
     <script src="{% static 'vendors/chart.js/dist/Chart.bundle.min.js' %}"></script>
     <script src="{% static 'js/logo.js' %}"></script>
 
+{% endblock %}
+
+{% block logo %}
     <script>
-    jQuery(document).ready(function () {
-       logo("logo_fonzy", 90);
-    });
+        jQuery(document).ready(function () {
+            logo("logo_fonzy", 90);
+        });
     </script>
 {% endblock %}
 
