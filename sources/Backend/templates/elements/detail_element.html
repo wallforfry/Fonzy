@@ -104,7 +104,7 @@
                         <i class="fa fa-ban"></i> Reset
                     </button>
                     <button type="button" class="btn btn-danger btn-sm"
-                            {% if not perms.front.delete_element %}disabled{% endif %} data-toggle="modal"
+                            {% if not perms.stocks.delete_element %}disabled{% endif %} data-toggle="modal"
                             data-target="#deleteElementModal">Supprimer
                     </button>
                 </div>
@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    {% if perms.front.delete_element %}
+    {% if perms.stocks.delete_element %}
         <!-- Modal -->
         <div class="modal fade" id="deleteElementModal" tabindex="-1" role="dialog"
              aria-labelledby="deleteElementModalLabel"

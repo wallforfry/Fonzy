@@ -22,7 +22,7 @@
                             <strong class="card-title">Éléments</strong>
                             <a href="{% url 'add_element' %}" class="float-right">
                                 <button type="button" class="btn btn-success btn-sm"
-                                        {% if not perms.front.add_element %}disabled{% endif %}>Ajouter
+                                        {% if not perms.stocks.add_element %}disabled{% endif %}>Ajouter
                                 </button>
                             </a>
                         </div>
