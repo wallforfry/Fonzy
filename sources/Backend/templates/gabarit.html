@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/selectFX/css/cs-skin-elastic.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/jqvmap/dist/jqvmap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/logo.css' %}">
 
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -98,6 +99,13 @@
 
 
     <script src="{% static 'vendors/chart.js/dist/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'js/logo.js' %}"></script>
+
+    <script>
+    jQuery(document).ready(function () {
+       logo("logo_fonzy", 90);
+    });
+    </script>
 {% endblock %}
 
 </html>

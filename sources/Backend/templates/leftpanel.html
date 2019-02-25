@@ -8,8 +8,8 @@
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="{% url 'index' %}"><h5>Tech</h5></a>
-            <a class="navbar-brand hidden" href="{% url 'index' %}"><h5>T</h5></a>
+            <a class="navbar-brand" href="{% url 'index' %}"><div id="logo_fonzy" class="logo mb-auto"></div></a>
+            <a class="navbar-brand hidden" href="{% url 'index' %}"><h5>F</h5></a>
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -19,7 +19,7 @@
                 </li>
                 <h3 class="menu-title">La Tech</h3><!-- /.menu-title -->
                 <li class="{% if request.resolver_match.view_name == "elements" %}active{% endif %}">
-                    <a href="#"> <i class="menu-icon fa fa-barcode"></i>Éléments </a>
+                    <a href="{% url 'list_elements' %}"> <i class="menu-icon fa fa-barcode"></i>Éléments </a>
                 </li>
                 <li class="{% if request.resolver_match.view_name == "packs" %}active{% endif %}">
                     <a href="#"> <i class="menu-icon fa fa-shopping-cart"></i>Packs </a>
