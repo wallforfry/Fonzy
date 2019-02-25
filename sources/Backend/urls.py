@@ -11,4 +11,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="index"),
+    path('elements/', views.list_elements, name="list_elements"),
+    path('elements/<str:slug>/', views.detail_element, name="detail_element"),
+    path('elements/add', views.add_element, name="add_element"),
+    path('elements/<str:slug>/save', views.save_element, name="save_element"),
+    path('elements/<str:slug>/delete', views.delete_element, name="delete_element"),
 ]

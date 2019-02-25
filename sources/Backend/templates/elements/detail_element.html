@@ -1,0 +1,131 @@
+{% extends 'gabarit.html' %}
+{% load l10n %}
+{% block content %}
+    <div class="col-12">
+        <div class="card">
+            <form action="{% url 'save_element' slug=e.slug %}" method="post" enctype="multipart/form-data"
+                  class="form-horizontal">
+                {% csrf_token %}
+                <div class="card-header">
+                    Modification de <strong>{{ e.name }}</strong> :
+                </div>
+                <div class="card-body card-block">
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="name-input" class=" form-control-label">Nom</label>
+                        </div>
+                        <div class="col-12 col-md-9"><input name="name" type="text" id="name-input"
+                                                            placeholder="Nom" class="form-control" value="{{ e.name }}" required>
+                            <small class="form-text text-muted">Nom de l'élément</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="description-input"
+                                                         class=" form-control-label">Description</label></div>
+                        <div class="col-12 col-md-9"><textarea name="description" id="description-input" rows="9"
+                                                               placeholder="Description"
+                                                               class="form-control">{{ e.description }}</textarea>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="marque-input"
+                                                         class=" form-control-label">Marque</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select name="marque_slug" id="marque-input" class="form-control" required>
+                                <option value="{{ e.marque.slug }}">{{ e.marque.name }}</option>
+                                {% for m in marques %}
+                                    <option value="{{ m.slug }}">{{ m.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="model-input" class=" form-control-label">Modèle</label>
+                        </div>
+                        <div class="col-12 col-md-9"><input name="model" type="text" id="model-input"
+                                                            placeholder="Modèle" class="form-control"
+                                                            value="{{ e.model }}">
+                            <small class="form-text text-muted">Modèle de l'élément</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="price-input"
+                                                         class="control-label mb-1">Prix</label></div>
+                        <div class="col-12 col-md-9"><input id="price-input" name="price" type="number"
+                                                            class="form-control" aria-required="true"
+                                                            aria-invalid="false" value="{{ e.price|unlocalize }}" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="caution-input"
+                                                         class="control-label mb-1">Caution</label></div>
+                        <div class="col-12 col-md-9"><input id="caution-input" name="caution" type="number"
+                                                            class="form-control" aria-required="true"
+                                                            aria-invalid="false" value="{{ e.caution|unlocalize }}" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="categorie-input"
+                                                         class=" form-control-label">Catégorie</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select name="categorie_slug" id="categorie-input" class="form-control" required>
+                                <option value="{{ e.categorie.slug }}">{{ e.categorie.name }}</option>
+                                {% for c in categories %}
+                                    <option value="{{ c.slug }}">{{ c.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="image-input" class=" form-control-label">Image</label>
+                        </div>
+                        <div class="col-12 col-md-9"><input type="file" id="image-input" name="image"
+                                                            class="form-control-file"></div>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Enregistrer
+                    </button>
+                    <button type="reset" class="btn btn-secondary btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm"
+                            {% if not perms.front.delete_element %}disabled{% endif %} data-toggle="modal"
+                            data-target="#deleteElementModal">Supprimer
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    
+    {% if perms.front.delete_element %}
+        <!-- Modal -->
+        <div class="modal fade" id="deleteElementModal" tabindex="-1" role="dialog"
+             aria-labelledby="deleteElementModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteElementModalLabel">Supprimer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Êtes vous sûr de vouloir supprimer cet élément ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <form method="post" action="{% url 'delete_element' slug=e.slug %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
