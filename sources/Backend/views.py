@@ -37,6 +37,7 @@ def add_element(request):
         model = request.POST.get("model")
         description = request.POST.get("description")
         price = float(request.POST.get("price"))
+        count = int(request.POST.get("count"))
         caution = float(request.POST.get("caution"))
         categorie_slug = request.POST.get("categorie_slug")
         marque_slug = request.POST.get("marque_slug")
@@ -44,7 +45,7 @@ def add_element(request):
         categorie = Categorie.objects.get(slug=categorie_slug)
         marque = Marque.objects.get(slug=marque_slug)
 
-        elt = Element.objects.create(name=name, description=description, price=price, caution=caution, categorie=categorie, marque=marque, model=model)
+        elt = Element.objects.create(name=name, description=description, price=price, caution=caution, categorie=categorie, marque=marque, model=model, count=count)
         return redirect(reverse("detail_element", kwargs={"slug": elt.slug}))
     else:
         categories = Categorie.objects.all()
@@ -68,6 +69,7 @@ def save_element(request, slug):
     model = request.POST.get("model")
     price = float(request.POST.get("price"))
     caution = float(request.POST.get("caution"))
+    count = int(request.POST.get("count"))
     categorie_slug = request.POST.get("categorie_slug")
     marque_slug = request.POST.get("marque_slug")
 
@@ -82,5 +84,6 @@ def save_element(request, slug):
     element.caution = caution
     element.categorie = categorie
     element.marque = marque
+    element.count = count
     element.save()
     return redirect(reverse('detail_element', kwargs={"slug": element.slug}))

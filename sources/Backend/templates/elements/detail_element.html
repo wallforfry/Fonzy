@@ -14,7 +14,8 @@
                         <div class="col col-md-3"><label for="name-input" class=" form-control-label">Nom</label>
                         </div>
                         <div class="col-12 col-md-9"><input name="name" type="text" id="name-input"
-                                                            placeholder="Nom" class="form-control" value="{{ e.name }}" required>
+                                                            placeholder="Nom" class="form-control" value="{{ e.name }}"
+                                                            required>
                             <small class="form-text text-muted">Nom de l'élément</small>
                         </div>
                     </div>
@@ -49,11 +50,21 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                        <div class="col col-md-3"><label for="count-input"
+                                                         class="control-label mb-1">Quantité</label></div>
+                        <div class="col-12 col-md-9"><input id="count-input" name="count" type="number"
+                                                            class="form-control" aria-required="true"
+                                                            aria-invalid="false" value="{{ e.count }}"
+                                                            required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
                         <div class="col col-md-3"><label for="price-input"
                                                          class="control-label mb-1">Prix</label></div>
                         <div class="col-12 col-md-9"><input id="price-input" name="price" type="number"
                                                             class="form-control" aria-required="true"
-                                                            aria-invalid="false" value="{{ e.price|unlocalize }}" required>
+                                                            aria-invalid="false" value="{{ e.price|unlocalize }}"
+                                                            required>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -61,7 +72,8 @@
                                                          class="control-label mb-1">Caution</label></div>
                         <div class="col-12 col-md-9"><input id="caution-input" name="caution" type="number"
                                                             class="form-control" aria-required="true"
-                                                            aria-invalid="false" value="{{ e.caution|unlocalize }}" required>
+                                                            aria-invalid="false" value="{{ e.caution|unlocalize }}"
+                                                            required>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -100,7 +112,7 @@
 
         </div>
     </div>
-    
+
     {% if perms.front.delete_element %}
         <!-- Modal -->
         <div class="modal fade" id="deleteElementModal" tabindex="-1" role="dialog"
