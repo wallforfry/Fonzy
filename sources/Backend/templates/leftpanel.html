@@ -1,0 +1,52 @@
+{% load static %}
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="{% url 'index' %}"><h5>Tech</h5></a>
+            <a class="navbar-brand hidden" href="{% url 'index' %}"><h5>T</h5></a>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="{% if request.resolver_match.view_name == "dashboard" %}active{% endif %}">
+                    <a href="{# url 'dashboard' #}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                </li>
+                <h3 class="menu-title">La Tech</h3><!-- /.menu-title -->
+                <li class="{% if request.resolver_match.view_name == "elements" %}active{% endif %}">
+                    <a href="#"> <i class="menu-icon fa fa-barcode"></i>Éléments </a>
+                </li>
+                <li class="{% if request.resolver_match.view_name == "packs" %}active{% endif %}">
+                    <a href="#"> <i class="menu-icon fa fa-shopping-cart"></i>Packs </a>
+                </li>
+                <li class="{% if request.resolver_match.view_name == "dashboard" %}active{% endif %}">
+                    <a href="#"> <i class="menu-icon fa fa-list-ul"></i>Catégories </a>
+                </li>
+                <li class="{% if request.resolver_match.view_name == "devis" %}active{% endif %}">
+                    <a href="#"> <i class="menu-icon fa fa-list"></i>Devis </a>
+                </li>
+                <li class="{% if request.resolver_match.view_name == "clients" %}active{% endif %}">
+                    <a href="#"> <i class="menu-icon fa fa-users"></i>Clients </a>
+                </li>
+
+
+                {% if user.is_superuser %}
+                    <h3 class="menu-title">Gestion</h3><!-- /.menu-title -->
+                    <li>
+                        <a href="{# url 'admin_users' #}"><i class="menu-icon fa fa-user"></i>Utilisateurs</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'admin:index' %}"> <i class="menu-icon fa fa-laptop"></i>Django</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->

@@ -1,0 +1,59 @@
+{% extends 'gabarit.html' %}
+{% block body %}
+    <body class="bg-dark">
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="#">
+                        <h1>Tech</h1>
+                    </a>
+                </div>
+                <div class="login-form">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>{{ form.username.label_tag }}</label>
+                            <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur">
+                        </div>
+                        <div class="form-group">
+                            <label>Mot de passe</label>
+                            <input name="password" type="password" class="form-control" placeholder="Mot de passe">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input name="remember_me" type="checkbox"> Rester connecté
+                            </label>
+                            <label class="pull-right">
+                                <a href="#">Mot de passe oublié ?</a>
+                            </label>
+
+                        </div>
+                        <!--
+                        <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
+                        <input id="user_captcha" type="hidden" name="recaptchaResponse" value=""/>-->
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Connexion</button>
+                        {% if registration_enabled %}
+                            <div class="register-link m-t-15 text-center">
+                                <p>Pas encore de compte ? <a href="{% url 'register' %}"> S'enregistrer</a></p>
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ recaptcha_site_key }}', {action: 'homepage'}).then(function (token) {
+                jQuery("#user_captcha").val(token);
+            });
+        });
+    </script>
+{% endblock %}
+</html>

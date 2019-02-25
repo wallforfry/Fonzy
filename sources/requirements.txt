@@ -2,3 +2,4 @@ Django==2.1.7
 pytz==2018.9
 psycopg2-binary
 pillow
+django-gravatar2==1.4.2

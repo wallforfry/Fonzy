@@ -1,0 +1,26 @@
+{% load static %}
+{% load gravatar %}
+<div class="col-sm-5">
+    <div class="user-area dropdown float-right">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="user-avatar rounded-circle" src="{% gravatar_url user.email 150 %}" alt="User Avatar">
+        </a>
+
+        <div class="user-menu dropdown-menu">
+            {% if user.is_authenticated %}
+                <a class="nav-link" href="#"><i class="fa fa-user"></i> {{ user.username }}</a>
+
+                <a class="nav-link" href="#"><i class="fa fa-bell"></i> Notifications <span class="count">13</span></a>
+
+                <a class="nav-link" href="#"><i class="fa fa-cog"></i> Paramètres</a>
+
+                <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Déconnexion</a>
+            {% else %}
+                <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Connexion</a>
+                {% if registration_enabled %}
+                    <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user-plus"></i> S'enregistrer</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
