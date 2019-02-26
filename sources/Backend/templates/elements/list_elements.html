@@ -19,7 +19,13 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Éléments</strong>
+                            {% if categorie %}
+                                Éléments de la catégorie <strong class="card-title">{{ categorie }}</strong> :
+                            {% elif marque %}
+                                Éléments de la marque <strong class="card-title">{{ marque }}</strong> :
+                            {% else %}
+                                <strong class="card-title">Éléments</strong>
+                            {% endif %}
                             <a href="{% url 'add_element' %}" class="float-right">
                                 <button type="button" class="btn btn-success btn-sm"
                                         {% if not perms.Stocks.add_element %}disabled{% endif %}>Ajouter
@@ -47,8 +53,12 @@
                                     <tr>
                                         <td class="align-middle"><a
                                                 href="{% url 'detail_element' slug=e.slug %}">{{ e.name }}</a></td>
-                                        <td class="align-middle">{{ e.marque }}</td>
-                                        <td class="align-middle">{{ e.categorie }}</td>
+                                        <td class="align-middle"><a
+                                                href="{% url 'list_elements_in_brand' slug=e.marque.slug %}">{{ e.marque }}</a>
+                                        </td>
+                                        <td class="align-middle"><a
+                                                href="{% url 'list_elements_in_categorie' slug=e.categorie.slug %}">{{ e.categorie }}</a>
+                                        </td>
                                         <td class="align-middle">{{ e.model }}</td>
                                         <td class="align-middle">{{ e.description }}</td>
                                         <td class="align-middle">{{ e.count }}</td>

@@ -19,6 +19,17 @@ def list_elements(request):
     elements = Element.objects.all()
     return render(request, "elements/list_elements.html", context={"elements": elements})
 
+@login_required
+def list_elements_in_categorie(request, slug):
+    elements = Element.objects.filter(categorie__slug=slug).all()
+    categorie = Categorie.objects.get(slug=slug)
+    return render(request, "elements/list_elements.html", context={"elements": elements, "categorie": categorie})
+
+@login_required
+def list_elements_in_brand(request, slug):
+    elements = Element.objects.filter(marque__slug=slug).all()
+    marque = Marque.objects.get(slug=slug)
+    return render(request, "elements/list_elements.html", context={"elements": elements, "marque": marque})
 
 @login_required
 def detail_element(request, slug):

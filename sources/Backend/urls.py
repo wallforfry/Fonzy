@@ -16,4 +16,6 @@ urlpatterns = [
     path('elements/add', views.add_element, name="add_element"),
     path('elements/<str:slug>/save', views.save_element, name="save_element"),
     path('elements/<str:slug>/delete', views.delete_element, name="delete_element"),
+    path('categories/<str:slug>/elements', views.list_elements_in_categorie, name="list_elements_in_categorie"),
+    path('marques/<str:slug>/elements', views.list_elements_in_brand, name="list_elements_in_brand"),
 ]
