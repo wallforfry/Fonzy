@@ -25,9 +25,10 @@ def detail_element(request, slug):
     element = Element.objects.get(slug=slug)
     categories = Categorie.objects.exclude(slug=element.categorie.slug).all()
     marques = Marque.objects.exclude(slug=element.marque.slug).all()
+    states = [(e[0], e[1]) for e in Element.STATE_CHOICES if e[0] != element.state]
 
     return render(request, "elements/detail_element.html",
-                  context={"e": element, "categories": categories, "marques": marques})
+                  context={"e": element, "categories": categories, "marques": marques, "states": states})
 
 
 @login_required
@@ -41,18 +42,20 @@ def add_element(request):
         caution = float(request.POST.get("caution"))
         categorie_slug = request.POST.get("categorie_slug")
         marque_slug = request.POST.get("marque_slug")
+        state = request.POST.get("state")
 
         categorie = Categorie.objects.get(slug=categorie_slug)
         marque = Marque.objects.get(slug=marque_slug)
 
-        elt = Element.objects.create(name=name, description=description, price=price, caution=caution, categorie=categorie, marque=marque, model=model, count=count)
+        elt = Element.objects.create(name=name, description=description, price=price, caution=caution, categorie=categorie, marque=marque, model=model, count=count, state=state)
         return redirect(reverse("detail_element", kwargs={"slug": elt.slug}))
     else:
         categories = Categorie.objects.all()
         marques = Marque.objects.all()
+        states = Element.STATE_CHOICES
 
         return render(request, "elements/add_element.html",
-                  context={"categories": categories, "marques": marques})
+                  context={"categories": categories, "marques": marques, "states": states})
 
 
 @login_required
@@ -72,6 +75,7 @@ def save_element(request, slug):
     count = int(request.POST.get("count"))
     categorie_slug = request.POST.get("categorie_slug")
     marque_slug = request.POST.get("marque_slug")
+    state = request.POST.get("state")
 
     categorie = Categorie.objects.get(slug=categorie_slug)
     marque = Marque.objects.get(slug=marque_slug)
@@ -85,5 +89,6 @@ def save_element(request, slug):
     element.categorie = categorie
     element.marque = marque
     element.count = count
+    element.state = state
     element.save()
     return redirect(reverse('detail_element', kwargs={"slug": element.slug}))

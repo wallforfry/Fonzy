@@ -30,6 +30,20 @@ class Categorie(models.Model):
 
 
 class Element(models.Model):
+    OK = 1
+    KO = 2
+    REPARATION = 3
+    INCONNU = 4
+    OUTDATED = 5
+
+    STATE_CHOICES = (
+        (OK, 'Bon état'),
+        (KO, 'Pour pièces'),
+        (REPARATION, 'En réparation'),
+        (INCONNU, 'Inconnu'),
+        (OUTDATED, 'Usagé'),
+    )
+
     name = models.CharField(max_length=255, verbose_name="Nom")
     marque = models.ForeignKey(Marque, on_delete=models.SET_NULL, verbose_name="Marque", null=True, blank=True)
     model = models.CharField(max_length=255, verbose_name="Modèle", blank=True)
@@ -40,6 +54,7 @@ class Element(models.Model):
     caution = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Caution", default=0)
     image = models.ImageField(verbose_name="Image", null=True, blank=True)
     slug = models.SlugField(unique=True, default="", blank=True, editable=False)
+    state = models.PositiveSmallIntegerField(choices=STATE_CHOICES, null=True, blank=True)
 
     def __str__(self):
         return self.name

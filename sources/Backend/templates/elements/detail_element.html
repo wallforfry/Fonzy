@@ -90,6 +90,19 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                        <div class="col col-md-3"><label for="state-input"
+                                                         class=" form-control-label">État</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select name="state" id="state-input" class="form-control" required>
+                                <option value="{{ e.state }}">{{ e.get_state_display }}</option>
+                                {% for s in states %}
+                                    <option value="{{ s.0 }}">{{ s.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
                         <div class="col col-md-3"><label for="image-input" class=" form-control-label">Image</label>
                         </div>
                         <div class="col-12 col-md-9"><input type="file" id="image-input" name="image"
