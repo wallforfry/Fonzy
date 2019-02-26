@@ -32,11 +32,13 @@
                                 <tr>
                                     <th>Nom</th>
                                     <th>Marque</th>
+                                    <th>Catégorie</th>
                                     <th>Modèle</th>
                                     <th>Description</th>
                                     <th>Quantité</th>
                                     <th>Prix</th>
                                     <th>Caution</th>
+                                    <th>État</th>
                                     <!--<th class="text-center">Disponible</th>-->
                                 </tr>
                                 </thead>
@@ -46,11 +48,13 @@
                                         <td class="align-middle"><a
                                                 href="{% url 'detail_element' slug=e.slug %}">{{ e.name }}</a></td>
                                         <td class="align-middle">{{ e.marque }}</td>
+                                        <td class="align-middle">{{ e.categorie }}</td>
                                         <td class="align-middle">{{ e.model }}</td>
                                         <td class="align-middle">{{ e.description }}</td>
                                         <td class="align-middle">{{ e.count }}</td>
                                         <td class="align-middle">{{ e.price }} €</td>
                                         <td class="align-middle">{{ e.caution }} €</td>
+                                        <td class="align-middle">{{ e.get_state_display }}</td>
                                         <!--<td class="text-center">{% if u.is_staff %}
                                             <span class="fa fa-check-square-o"></span>{% else %}
                                             <span class="fa fa-square-o"></span>{% endif %}</td>-->
